@@ -38,6 +38,13 @@ class MainActivity : AppCompatActivity() {
                 val price = textView3
                 var position = spinner2.selectedItem
                 price.text = ((one)* (goodName[position])!!.toInt()).toString()
+                val picture = imageView6
+                when (position){
+                    "guitars" -> picture.setImageResource(R.drawable.guitar)
+                    "drum" -> picture.setImageResource(R.drawable.drum)
+                    "keyboard" -> picture.setImageResource(R.drawable.keyboard)
+                    "violin" -> picture.setImageResource(R.drawable.violin)
+                }
             }
         }
 

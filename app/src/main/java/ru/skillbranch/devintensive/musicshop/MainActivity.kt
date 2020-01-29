@@ -1,17 +1,19 @@
 package ru.skillbranch.devintensive.musicshop
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var one = 0
     val goodName = mapOf("guitars" to 1500, "drum" to 1000, "keyboard" to 500, "violin" to 2000)
-    lateinit var position: Any
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +69,15 @@ class MainActivity : AppCompatActivity() {
         val price = textView3
         var position = spinner2.selectedItem
         price.text = ((one)* (goodName[position])!!.toInt()).toString()
+
+    }
+
+    fun addCard(view: View) {
+        val order = Order(one,(one)* (goodName[spinner2.selectedItem]!!.toInt()), spinner2.selectedItem, editText2.text)
+
+        val orderIntent = Intent(this,OrderActivity::class.java)
+        startActivity(orderIntent)
+
 
     }
 }

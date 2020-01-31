@@ -75,7 +75,11 @@ class MainActivity : AppCompatActivity() {
     fun addCard(view: View) {
         val order = Order(one,(one)* (goodName[spinner2.selectedItem]!!.toInt()), spinner2.selectedItem, editText2.text)
 
-        val orderIntent = Intent(this,OrderActivity::class.java)
+        val orderIntent = Intent(this,OrderActivity::class.java).apply {
+        putExtra("keyName", order.name)
+        putExtra("keyQuantity", order.quantity)
+        putExtra("keyInstrument", order.instrument.toString())
+        putExtra("keyPrice", order.price)}
         startActivity(orderIntent)
 
 

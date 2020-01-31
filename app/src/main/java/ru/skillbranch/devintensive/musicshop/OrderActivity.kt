@@ -1,17 +1,16 @@
 package ru.skillbranch.devintensive.musicshop
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_order.*
 
 class OrderActivity : AppCompatActivity() {
-    lateinit var keyName: String
-    lateinit var keyQuantity: String
-    lateinit var keyInstrument: String
-    lateinit var keyPrice: String
+    private lateinit var keyName: String
+    private lateinit var keyQuantity: String
+    private lateinit var keyInstrument: String
+    private lateinit var keyPrice: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,19 +18,19 @@ class OrderActivity : AppCompatActivity() {
 
         val keyName = intent.getStringExtra("keyName")
         val keyQuantity = intent.getStringExtra("keyQuantity")
-        val keyInstrument= intent.getStringExtra("keyInstrument")
+        val keyInstrument = intent.getStringExtra("keyInstrument")
         val keyPrice = intent.getStringExtra("keyPrice")
 
-        val orderActName = textViewName.apply {
+        textViewName.apply {
             text = keyName
         }
-        val orderActQuantity = textViewQuantity.apply {
+        textViewQuantity.apply {
             text = keyQuantity
         }
-        val orderActPrice = textViewPrice.apply {
+        textViewPrice.apply {
             text = keyPrice
         }
-        val orderActInstrument = textViewInstrument.apply {
+        textViewInstrument.apply {
             text = keyInstrument
         }
 
@@ -39,10 +38,12 @@ class OrderActivity : AppCompatActivity() {
     }
 
     fun sendEmail(view: View) {
-        val actionSend = Intent(Intent.ACTION_SEND)
-        actionSend.putExtra(Intent.EXTRA_EMAIL, arrayOf("robin839168@gmail.com"))
-        actionSend.putExtra(Intent.EXTRA_SUBJECT, "Order")
-        actionSend.putExtra(Intent.EXTRA_TEXT, "$keyName"+"/n"+"$keyInstrument"+"/n"+"$keyQuantity"+"/n"+"$keyPrice" )
+        val str = "$keyName/n$keyInstrument/n$keyQuantity/n$keyPrice"
+        val actionSend = Intent(Intent.ACTION_SEND).apply {
+        putExtra(Intent.EXTRA_EMAIL, arrayOf("robin839168@gmail.com"))
+        putExtra(Intent.EXTRA_SUBJECT, "Order")
+        putExtra(Intent.EXTRA_TEXT, str)}
 
     }
+
 }

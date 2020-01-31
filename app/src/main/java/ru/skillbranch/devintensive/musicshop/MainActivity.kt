@@ -1,13 +1,11 @@
 package ru.skillbranch.devintensive.musicshop
 
 import android.content.Intent
-import android.content.res.ColorStateList
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         spinner2.adapter = spinnerAdapter
 
 
-        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -38,10 +36,10 @@ class MainActivity : AppCompatActivity() {
                 id: Long
             ) {
                 val price = textView3
-                var position = spinner2.selectedItem
-                price.text = ((one)* (goodName[position])!!.toInt()).toString()
+                val position = spinner2.selectedItem
+                price.text = ((one) * (goodName[position])!!.toInt()).toString()
                 val picture = imageView6
-                when (position){
+                when (position) {
                     "guitars" -> picture.setImageResource(R.drawable.guitar)
                     "drum" -> picture.setImageResource(R.drawable.drum)
                     "keyboard" -> picture.setImageResource(R.drawable.keyboard)
@@ -57,33 +55,40 @@ class MainActivity : AppCompatActivity() {
         one++
         pluss.text = one.toString()
         val price = textView3
-        var position = spinner2.selectedItem
-        price.text = ((one)* (goodName[position])!!.toInt()).toString()
+        val position = spinner2.selectedItem
+        price.text = ((one) * (goodName[position])!!).toString()
     }
+
     fun decreaseQuantity(view: View) {
         val minus = textView5
         if (one > 0) {
             one--
             minus.text = one.toString()
-        } else {minus.text = "0"}
+        } else {
+            minus.text = "0"
+        }
         val price = textView3
-        var position = spinner2.selectedItem
-        price.text = ((one)* (goodName[position])!!.toInt()).toString()
+        val position = spinner2.selectedItem
+        price.text = ((one) * (goodName[position])!!).toString()
+
 
     }
 
     fun addCard(view: View) {
-        val order = Order(one,(one)* (goodName[spinner2.selectedItem]!!.toInt()), spinner2.selectedItem, editText2.text)
+        val order = Order(
+            one,
+            (one) * (goodName[spinner2.selectedItem]!!.toInt()),
+            spinner2.selectedItem,
+            editText2.text
+        )
 
-        val orderIntent = Intent(this,OrderActivity::class.java).apply {
-        putExtra("keyName", order.name.toString())
-        putExtra("keyQuantity", order.quantity.toString())
-        putExtra("keyInstrument", order.instrument.toString())
-        putExtra("keyPrice", order.price.toString())
+        val orderIntent = Intent(this, OrderActivity::class.java).apply {
+            putExtra("keyName", order.name.toString())
+            putExtra("keyQuantity", order.quantity.toString())
+            putExtra("keyInstrument", order.instrument.toString())
+            putExtra("keyPrice", order.price.toString())
 
         }
         startActivity(orderIntent)
-
-
     }
 }

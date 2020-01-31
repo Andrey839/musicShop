@@ -76,10 +76,12 @@ class MainActivity : AppCompatActivity() {
         val order = Order(one,(one)* (goodName[spinner2.selectedItem]!!.toInt()), spinner2.selectedItem, editText2.text)
 
         val orderIntent = Intent(this,OrderActivity::class.java).apply {
-        putExtra("keyName", order.name)
-        putExtra("keyQuantity", order.quantity)
+        putExtra("keyName", order.name.toString())
+        putExtra("keyQuantity", order.quantity.toString())
         putExtra("keyInstrument", order.instrument.toString())
-        putExtra("keyPrice", order.price)}
+        putExtra("keyPrice", order.price.toString())
+
+        }
         startActivity(orderIntent)
 
 
